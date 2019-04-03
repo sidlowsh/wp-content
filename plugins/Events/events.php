@@ -1,6 +1,6 @@
 <?php
 /**
- * @package Reading_List
+ * @package Event_List
  * @version 0.1
  */
 /*
