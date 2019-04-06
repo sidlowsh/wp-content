@@ -4,10 +4,10 @@
  * @version 0.1
  */
 /*
-Plugin Name: Reading List
+Plugin Name: Events
 Plugin URI: http://andrewspittle.net/projects/reading-list
-Description: Track the books you read right from the WordPress Dashboard.
-Author: Andrew Spittle
+Description: Create custom event posts.
+Author: Andrew Spittle Adapted by Sarah Sidlow
 Version: 0.1
 Author URI: http://andrewspittle.net/
 */
@@ -18,19 +18,19 @@ Author URI: http://andrewspittle.net/
  * @since Reading List 0.1
  */
 
-add_action( 'init', 'rl_create_post_type' );
+add_action( 'init', 'ev_create_post_type' );
 
-function rl_create_post_type() {
+function ev_create_post_type() {
 	$labels = array(
-		'name' 							=> __( 'Books', 'readinglist' ),
-		'singular_name' 				=> __( 'Book', 'readinglist' ),
-		'search_items'					=> __( 'Search Books', 'readinglist' ),
-		'all_items'						=> __( 'All Books', 'readinglist' ),
-		'edit_item'						=> __( 'Edit Book', 'readinglist' ),
-		'update_item' 					=> __( 'Update Book', 'readinglist' ),
-		'add_new_item' 					=> __( 'Add New Book', 'readinglist' ),
-		'new_item_name' 				=> __( 'New Book', 'readinglist' ),
-		'menu_name' 					=> __( 'Books', 'readinglist' ),
+		'name' 							=> __( 'Events', 'readinglist' ),
+		'singular_name' 				=> __( 'Event', 'readinglist' ),
+		'search_items'					=> __( 'Search Events', 'readinglist' ),
+		'all_items'						=> __( 'All Events', 'readinglist' ),
+		'edit_item'						=> __( 'Edit Event', 'readinglist' ),
+		'update_item' 					=> __( 'Update Event', 'readinglist' ),
+		'add_new_item' 					=> __( 'Add New Event', 'readinglist' ),
+		'new_item_name' 				=> __( 'New Event', 'readinglist' ),
+		'menu_name' 					=> __( 'Events', 'readinglist' ),
 	);
 	
 	$args = array (
@@ -38,10 +38,10 @@ function rl_create_post_type() {
 		'public' 		=> true,
 		'menu_position' => 20,
 		'has_archive' 	=> true,
-		'rewrite'		=> array( 'slug' => 'books' ),
+		'rewrite'		=> array( 'slug' => 'events' ),
 		'supports' 		=> array( 'title', 'thumbnail', 'editor' )
 	);
-	register_post_type( 'rl_book', $args );
+	register_post_type( 'rl_event', $args );
 }
 
 /**
@@ -50,26 +50,26 @@ function rl_create_post_type() {
  * @since Reading List 0.1
  */
 
-/* Hook in to the init action and call rl_create_book_taxonomies when it fires. */
-add_action( 'init', 'rl_create_book_taxonomies', 0 );
+/* Hook in to the init action and call rl_create_event_taxonomies when it fires. */
+add_action( 'init', 'ev_create_event_taxonomies', 0 );
 
-function rl_create_book_taxonomies() {
+function ev_create_event_taxonomies() {
 	// Add new taxonomy, keep it non-hierarchical (like tags)
 	$labels = array(
-		'name' 							=> __( 'Authors', 'readinglist' ),
-		'singular_name' 				=> __( 'Author', 'readinglist' ),
-		'search_items' 					=> __( 'Search Authors', 'readinglist' ),
-		'all_items' 					=> __( 'All Authors', 'readinglist' ),
-		'edit_item' 					=> __( 'Edit Author', 'readinglist' ), 
-		'update_item' 					=> __( 'Update Author', 'readinglist' ),
-		'add_new_item' 					=> __( 'Add New Author', 'readinglist' ),
-		'new_item_name' 				=> __( 'New Author Name', 'readinglist' ),
-		'separate_items_with_commas' 	=> __( 'Separate authors with commas', 'readinglist' ),
-		'choose_from_most_used' 		=> __( 'Choose from the most used authors', 'readinglist' ),
-		'menu_name' 					=> __( 'Authors', 'readinglist' ),
+		'name' 							=> __( 'Keywords', 'readinglist' ),
+		'singular_name' 				=> __( 'Keyword', 'readinglist' ),
+		'search_items' 					=> __( 'Search Keywords', 'readinglist' ),
+		'all_items' 					=> __( 'All Keywords', 'readinglist' ),
+		'edit_item' 					=> __( 'Edit Keyword', 'readinglist' ), 
+		'update_item' 					=> __( 'Update Keyword', 'readinglist' ),
+		'add_new_item' 					=> __( 'Add New Keyword', 'readinglist' ),
+		'new_item_name' 				=> __( 'New Keyword', 'readinglist' ),
+		'separate_items_with_commas' 	=> __( 'Separate keywords with commas', 'readinglist' ),
+		'choose_from_most_used' 		=> __( 'Choose from the most used keywords', 'readinglist' ),
+		'menu_name' 					=> __( 'Keywords', 'readinglist' ),
 	); 	
 		
-	register_taxonomy( 'book-author', array( 'rl_book' ), array(
+	register_taxonomy( 'keywords', array( 'ev_book' ), array(
 		'hierarchical' 		=> false,
 		'labels' 			=> $labels,
 		'show_ui' 			=> true,
@@ -89,46 +89,46 @@ function rl_create_book_taxonomies() {
 */
 
 /* Fire our meta box setup function on the editor screen. */
-add_action( 'load-post.php', 'rl_post_meta_boxes_setup' );
-add_action( 'load-post-new.php', 'rl_post_meta_boxes_setup' );
+add_action( 'load-post.php', 'ev_post_meta_boxes_setup' );
+add_action( 'load-post-new.php', 'ev_post_meta_boxes_setup' );
 
 /* Our meta box set up function. */
-function rl_post_meta_boxes_setup() {
+function ev_post_meta_boxes_setup() {
 
 	/* Add meta boxes on the 'add_meta_boxes' hook. */
-	add_action( 'add_meta_boxes', 'rl_add_post_meta_boxes' );
+	add_action( 'add_meta_boxes', 'ev_add_post_meta_boxes' );
 	
 	/* Save post meta on the 'save_post' hook. */
-	add_action( 'save_post', 'rl_pages_save_meta', 10, 2 );
+	add_action( 'save_post', 'ev_date_save_meta', 10, 2 );
 }
 
 /* Create one or more meta boxes to be displayed on the post editor screen. */
-function rl_add_post_meta_boxes() {
+function ev_add_post_meta_boxes() {
 
 	add_meta_box(
-		'rl-pages',								// Unique ID
-		esc_html__( 'Pages', 'example' ),		// Title
-		'rl_pages_meta_box',					// Callback function
-		'rl_book',								// Add metabox to our custom post type
+		'ev-date',								// Unique ID
+		esc_html__( 'Date', 'example' ),		// Title
+		'ev_date_meta_box',					// Callback function
+		'ev_event',								// Add metabox to our custom post type
 		'side',									// Context
 		'default'								// Priority
 	);
 }
 
 /* Display the post meta box. */
-function rl_pages_meta_box( $object, $box ) { ?>
+function ev_date_meta_box( $object, $box ) { ?>
 
-	<?php wp_nonce_field( basename( __FILE__ ), 'rl_pages_nonce' ); ?>
+	<?php wp_nonce_field( basename( __FILE__ ), 'rl_date_nonce' ); ?>
 
-	<p class="howto"><label for="rl-pages"><?php _e( "Add the page count of the book.", 'example' ); ?></label></p>
-	<p><input class="widefat" type="text" name="rl-pages" id="rl-pages" value="<?php echo esc_attr( get_post_meta( $object->ID, 'rl_pages', true ) ); ?>" size="30" /></p>
+	<p class="howto"><label for="rl-date"><?php _e( "Add the date of the event.", 'example' ); ?></label></p>
+	<p><input class="widefat" type="text" name="rl-date" id="rl-date" value="<?php echo esc_attr( get_post_meta( $object->ID, 'rl_date', true ) ); ?>" size="30" /></p>
 <?php }
 
 /* Save the meta box's data. */
-function rl_pages_save_meta( $post_id, $post ) {
+function ev_date_save_meta( $post_id, $post ) {
 
 	/* Verify the nonce before proceeding. */
-	if ( !isset( $_POST['rl_pages_nonce'] ) || !wp_verify_nonce( $_POST['rl_pages_nonce'], basename( __FILE__ ) ) )
+	if ( !isset( $_POST['rl_date_nonce'] ) || !wp_verify_nonce( $_POST['ev_date_nonce'], basename( __FILE__ ) ) )
 		return $post_id;
 
 	/* Get the post type object. */
@@ -139,10 +139,10 @@ function rl_pages_save_meta( $post_id, $post ) {
 		return $post_id;
 
 	/* Get the posted data and sanitize it for use as an HTML class. */
-	$new_meta_value = ( isset( $_POST['rl-pages'] ) ? sanitize_html_class( $_POST['rl-pages'] ) : '' );
+	$new_meta_value = ( isset( $_POST['rl-date'] ) ? sanitize_html_class( $_POST['rl-date'] ) : '' );
 
 	/* Get the meta key. */
-	$meta_key = 'rl_pages';
+	$meta_key = 'rl_date';
 
 	/* Get the meta value of the custom field key. */
 	$meta_value = get_post_meta( $post_id, $meta_key, true );

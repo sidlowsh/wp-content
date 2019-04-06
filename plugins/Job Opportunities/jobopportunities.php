@@ -53,7 +53,7 @@ function rl_create_post_type() {
 /* Hook in to the init action and call rl_create_book_taxonomies when it fires. */
 add_action( 'init', 'rl_create_book_taxonomies', 0 );
 
-function rl_create_book_taxonomies() {
+function rl_create_job_taxonomies() {
 	// Add new taxonomy, keep it non-hierarchical (like tags)
 	$labels = array(
 		'name' 							=> __( 'Skills', 'readinglist' ),
