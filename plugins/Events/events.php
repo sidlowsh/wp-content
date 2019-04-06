@@ -22,15 +22,15 @@ add_action( 'init', 'ev_create_post_type' );
 
 function ev_create_post_type() {
 	$labels = array(
-		'name' 							=> __( 'Events', 'readinglist' ),
-		'singular_name' 				=> __( 'Event', 'readinglist' ),
-		'search_items'					=> __( 'Search Events', 'readinglist' ),
-		'all_items'						=> __( 'All Events', 'readinglist' ),
-		'edit_item'						=> __( 'Edit Event', 'readinglist' ),
-		'update_item' 					=> __( 'Update Event', 'readinglist' ),
-		'add_new_item' 					=> __( 'Add New Event', 'readinglist' ),
-		'new_item_name' 				=> __( 'New Event', 'readinglist' ),
-		'menu_name' 					=> __( 'Events', 'readinglist' ),
+		'name' 							=> __( 'Events', 'eventlist' ),
+		'singular_name' 				=> __( 'Event', 'eventlist' ),
+		'search_items'					=> __( 'Search Events', 'eventlist' ),
+		'all_items'						=> __( 'All Events', 'eventlist' ),
+		'edit_item'						=> __( 'Edit Event', 'eventlist' ),
+		'update_item' 					=> __( 'Update Event', 'eventlist' ),
+		'add_new_item' 					=> __( 'Add New Event', 'eventlist' ),
+		'new_item_name' 				=> __( 'New Event', 'eventlist' ),
+		'menu_name' 					=> __( 'Events', 'eventlist' ),
 	);
 	
 	$args = array (
@@ -69,7 +69,7 @@ function ev_create_event_taxonomies() {
 		'menu_name' 					=> __( 'Keywords', 'readinglist' ),
 	); 	
 		
-	register_taxonomy( 'keywords', array( 'ev_book' ), array(
+	register_taxonomy( 'keywords', array( 'rl_event' ), array(
 		'hierarchical' 		=> false,
 		'labels' 			=> $labels,
 		'show_ui' 			=> true,
@@ -109,7 +109,7 @@ function ev_add_post_meta_boxes() {
 		'ev-date',								// Unique ID
 		esc_html__( 'Date', 'example' ),		// Title
 		'ev_date_meta_box',					// Callback function
-		'ev_event',								// Add metabox to our custom post type
+		'rl_event',								// Add metabox to our custom post type
 		'side',									// Context
 		'default'								// Priority
 	);
@@ -118,7 +118,7 @@ function ev_add_post_meta_boxes() {
 /* Display the post meta box. */
 function ev_date_meta_box( $object, $box ) { ?>
 
-	<?php wp_nonce_field( basename( __FILE__ ), 'rl_date_nonce' ); ?>
+	<?php wp_nonce_field( basename( __FILE__ ), 'ev_date_nonce' ); ?>
 
 	<p class="howto"><label for="rl-date"><?php _e( "Add the date of the event.", 'example' ); ?></label></p>
 	<p><input class="widefat" type="text" name="rl-date" id="rl-date" value="<?php echo esc_attr( get_post_meta( $object->ID, 'rl_date', true ) ); ?>" size="30" /></p>
