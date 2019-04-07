@@ -1,8 +1,8 @@
 /*
  Theme Name:   Twenty Seventeen Child
- Theme URI:    http://example.com/twenty-fifteen-child/
+ Theme URI:    http://example.com/twenty-seventeen-child/
  Description:  Twenty Seventeen Child Theme
- Author:       John Doe
+ Author:       Sarah Sidlow
  Author URI:   http://example.com
  Template:     twentyseventeen
  Version:      1.0.0
@@ -13,5 +13,14 @@
 */
 
 .site-content {
-	background-color: blue;
-}
+	background-color: yellow;
+} 	
+
+body, button, input, select, textarea {
+    color: #333;
+    font-family: Adobe Caslon;
+    font-size: 15px;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.66;
+
