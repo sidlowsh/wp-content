@@ -18,11 +18,11 @@ Author URI: http://andrewspittle.net/
  * @since Reading List 0.1
  */
 
-add_action( 'init', 'rl_create_post_type' );
+add_action( 'init', 'create_post_type' );
 
-function rl_create_post_type() {
+function create_post_type() {
 	$labels = array(
-		'name' 							=> __( 'Job Opps', 'readinglist' ),
+		'name' 							=> __( 'Job', 'readinglist' ),
 		'singular_name' 				=> __( 'Job', 'readinglist' ),
 		'search_items'					=> __( 'Search Jobs', 'readinglist' ),
 		'all_items'						=> __( 'All Jobs', 'readinglist' ),
@@ -38,20 +38,20 @@ function rl_create_post_type() {
 		'public' 		=> true,
 		'menu_position' => 20,
 		'has_archive' 	=> true,
-		'rewrite'		=> array( 'slug' => 'books' ),
+		'rewrite'		=> array( 'slug' => 'jobs' ),
 		'supports' 		=> array( 'title', 'thumbnail', 'editor' )
 	);
 	register_post_type( 'rl_book', $args );
 }
 
 /**
- * Create our custom taxonomies. One hierarchical one for genres and a flat one for employers.
+ * Create our custom taxonomies. One hierarchical one for skills and a flat one for employers.
  *
  * @since Reading List 0.1
  */
 
 /* Hook in to the init action and call rl_create_book_taxonomies when it fires. */
-add_action( 'init', 'rl_create_book_taxonomies', 0 );
+add_action( 'init', 'rl_create_job_taxonomies', 0 );
 
 function rl_create_job_taxonomies() {
 	// Add new taxonomy, keep it non-hierarchical (like tags)
@@ -80,7 +80,7 @@ function rl_create_job_taxonomies() {
 }
 
 /**
- * Add custom meta box for tracking the employer.
+ * Add custom meta box for tracking the job's employer.
  *
  * Props to Justin Tadlock: http://wp.smashingmagazine.com/2011/10/04/create-custom-post-meta-boxes-wordpress/
  *
@@ -120,8 +120,8 @@ function rl_employer_meta_box( $object, $box ) { ?>
 
 	<?php wp_nonce_field( basename( __FILE__ ), 'rl_employer_nonce' ); ?>
 
-	<p class="howto"><label for="rl-employer"><?php _e( "Add the employer name here.", 'example' ); ?></label></p>
-	<p><input class="widefat" type="text" name="rl-pages" id="rl-pages" value="<?php echo esc_attr( get_post_meta( $object->ID, 'rl_employer', true ) ); ?>" size="30" /></p>
+	<p class="howto"><label for="rl-employer"><?php _e( "Add the employer here.", 'example' ); ?></label></p>
+	<p><input class="widefat" type="text" name="rl-employer" id="rl-employer" value="<?php echo esc_attr( get_post_meta( $object->ID, 'rl_employer', true ) ); ?>" size="30" /></p>
 <?php }
 
 /* Save the meta box's data. */
@@ -159,7 +159,5 @@ function rl_employer_save_meta( $post_id, $post ) {
 	elseif ( '' == $new_meta_value && $meta_value )
 		delete_post_meta( $post_id, $meta_key, $meta_value );
 } 
-
-
 
 ?>
