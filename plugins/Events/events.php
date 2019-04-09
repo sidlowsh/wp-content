@@ -75,7 +75,7 @@ function ev_create_event_taxonomies() {
 		'show_ui' 			=> true,
 		'show_admin_column' => true,
 		'query_var' 		=> true,
-		'rewrite' 			=> array( 'slug' => 'book-author' ),
+		'rewrite' 			=> array( 'slug' => 'keywords' ),
 	));
 }
 
@@ -120,15 +120,15 @@ function ev_date_meta_box( $object, $box ) { ?>
 
 	<?php wp_nonce_field( basename( __FILE__ ), 'ev_date_nonce' ); ?>
 
-	<p class="howto"><label for="rl-date"><?php _e( "Add the date of the event.", 'example' ); ?></label></p>
-	<p><input class="widefat" type="text" name="rl-date" id="rl-date" value="<?php echo esc_attr( get_post_meta( $object->ID, 'rl_date', true ) ); ?>" size="30" /></p>
+	<p class="howto"><label for="ev-date"><?php _e( "Add the date of the event.", 'example' ); ?></label></p>
+	<p><input class="widefat" type="text" name="ev-date" id="ev-date" value="<?php echo esc_attr( get_post_meta( $object->ID, 'ev_date', true ) ); ?>" size="30" /></p>
 <?php }
 
 /* Save the meta box's data. */
 function ev_date_save_meta( $post_id, $post ) {
 
 	/* Verify the nonce before proceeding. */
-	if ( !isset( $_POST['rl_date_nonce'] ) || !wp_verify_nonce( $_POST['ev_date_nonce'], basename( __FILE__ ) ) )
+	if ( !isset( $_POST['ev_date_nonce'] ) || !wp_verify_nonce( $_POST['ev_date_nonce'], basename( __FILE__ ) ) )
 		return $post_id;
 
 	/* Get the post type object. */
@@ -139,10 +139,10 @@ function ev_date_save_meta( $post_id, $post ) {
 		return $post_id;
 
 	/* Get the posted data and sanitize it for use as an HTML class. */
-	$new_meta_value = ( isset( $_POST['rl-date'] ) ? sanitize_html_class( $_POST['rl-date'] ) : '' );
+	$new_meta_value = ( isset( $_POST['ev-date'] ) ? sanitize_html_class( $_POST['ev-date'] ) : '' );
 
 	/* Get the meta key. */
-	$meta_key = 'rl_date';
+	$meta_key = 'ev_date';
 
 	/* Get the meta value of the custom field key. */
 	$meta_value = get_post_meta( $post_id, $meta_key, true );

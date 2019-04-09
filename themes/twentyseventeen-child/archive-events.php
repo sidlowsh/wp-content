@@ -1,6 +1,6 @@
 <?php
 /**
- * The template for displaying archive pages
+ * The template for displaying the events archive
  *
  * @link https://developer.wordpress.org/themes/basics/template-hierarchy/
  *
@@ -15,7 +15,7 @@ get_header(); ?>
 <div class="wrap">
 
 	<?php if ( have_posts() ) : ?>
-		<header class="page-header">
+		<header class="page-header events-page-header">
 			<?php
 				the_archive_title( '<h1 class="page-title">', '</h1>' );
 				the_archive_description( '<div class="taxonomy-description">', '</div>' );
