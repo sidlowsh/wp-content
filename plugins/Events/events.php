@@ -80,7 +80,7 @@ function ev_create_event_taxonomies() {
 }
 
 /**
- * Add custom meta box for tracking the date of the event.
+ * Add custom meta box for tracking the page numbers of the book.
  *
  * Props to Justin Tadlock: http://wp.smashingmagazine.com/2011/10/04/create-custom-post-meta-boxes-wordpress/
  *
@@ -121,7 +121,7 @@ function ev_date_meta_box( $object, $box ) { ?>
 	<?php wp_nonce_field( basename( __FILE__ ), 'ev_date_nonce' ); ?>
 
 	<p class="howto"><label for="ev-date"><?php _e( "Add the date of the event.", 'example' ); ?></label></p>
-	<p><input class="widefat" type="text_date_timestamp" name="ev-date" id="ev-date" value="<?php echo esc_attr( get_post_meta( $object->ID, 'ev_date', true ) ); ?>" size="30" /></p>
+	<p><input class="widefat" type="text" name="ev-date" id="ev-date" value="<?php echo esc_attr( get_post_meta( $object->ID, 'ev_date', true ) ); ?>" size="30" /></p>
 <?php }
 
 /* Save the meta box's data. */
@@ -159,7 +159,5 @@ function ev_date_save_meta( $post_id, $post ) {
 	elseif ( '' == $new_meta_value && $meta_value )
 		delete_post_meta( $post_id, $meta_key, $meta_value );
 } 
-
-
 
 ?>
