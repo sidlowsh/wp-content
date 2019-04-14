@@ -4,7 +4,7 @@
  * @version 0.1
  */
 /*
-Plugin Name: Job Opps
+Plugin Name: Jobs
 Plugin URI: http://andrewspittle.net/projects/reading-list
 Description: Track and display job opportunities.
 Author: Andrew Spittle; Adapted by Sarah Sidlow
