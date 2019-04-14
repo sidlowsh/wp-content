@@ -12,12 +12,7 @@
  Text Domain:  twenty-seventeen-child
 */
 
-html {
-	font-family: serif;
-	line-height: 1.15;
-	-ms-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%;
-}
+
 
 .site-title {
     font-size: 4.75rem;
@@ -50,6 +45,21 @@ html {
 	font-size: 14px;
 } 	
 
+.site-content a:link {
+	font-family: "Georgia";
+}
+
+.site-content a:hover {
+	color: #00b5e2;
+}
+
+.navigation-top a:link {
+	font-family: "Georgia";
+}
+
+.navigation-top a:hover {
+	color: #00b5e2;
+}
 
 .site-footer {
 	background-color: #bbbcbc;
@@ -58,4 +68,10 @@ html {
 .widget-area {
 	padding-top: 0px;
 	padding-bottom: 0px;
+}
+
+.single-featured-image-header img {
+  height: auto;
+  width: 50%;
+  float: center;
 }
