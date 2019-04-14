@@ -12,17 +12,12 @@
  Text Domain:  twenty-seventeen-child
 */
 
-
-
-.site-title {
-    font-size: 4.75rem;
-    line-height: 1.25;
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
-    letter-spacing: -1px;
+.entry-date {
+	color: #00b5e2;
 }
 
-.navigation-top {
-	background-color: white;
+.entry-title {
+	font-family: "Trebuchet MS", Helvetica, sans-serif;
 }
 
 .menu-item {
@@ -31,12 +26,22 @@
     font-size: 16px;
 }
 
-.entry-title {
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
+.navigation-top {
+	background-color: white;
 }
 
-.entry-date {
+.navigation-top a:link {
+	font-family: "Georgia";
+}
+
+.navigation-top a:hover {
 	color: #00b5e2;
+}
+
+.single-featured-image-header img {
+  height: auto;
+  width: 50%;
+  float: center;
 }
 
 .site-content {
@@ -53,16 +58,15 @@
 	color: #00b5e2;
 }
 
-.navigation-top a:link {
-	font-family: "Georgia";
-}
-
-.navigation-top a:hover {
-	color: #00b5e2;
-}
-
 .site-footer {
 	background-color: #bbbcbc;
+}
+
+.site-title {
+    font-size: 4.75rem;
+    line-height: 1.25;
+    font-family: "Trebuchet MS", Helvetica, sans-serif;
+    letter-spacing: -1px;
 }
 
 .widget-area {
@@ -70,8 +74,3 @@
 	padding-bottom: 0px;
 }
 
-.single-featured-image-header img {
-  height: auto;
-  width: 50%;
-  float: center;
-}
