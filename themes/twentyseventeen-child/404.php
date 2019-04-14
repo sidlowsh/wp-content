@@ -21,7 +21,7 @@ get_header(); ?>
 					<h1 class="page-title"><?php _e( 'Ruh roh! We can&rsquo;t find what you&rsquo;re looking for.', 'twentyseventeen' ); ?></h1>
 				</header><!-- .page-header -->
 				<div class="page-content">
-					<img src="https://image.shutterstock.com/image-photo/sad-english-bulldog-lying-on-260nw-78204640.jpg" alt="404 error" style="width:100px; border:0;">
+					<img src="https://image.shutterstock.com/image-photo/sad-english-bulldog-lying-on-260nw-78204640.jpg" alt="404 error" style="width:400px; border:0;">
 					<p><?php _e( 'It looks like nothing was found at this location. Wanna try again?', 'twentyseventeen' ); ?></p>
 
 					<?php get_search_form(); ?>
