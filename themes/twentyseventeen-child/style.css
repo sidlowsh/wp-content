@@ -12,50 +12,15 @@
  Text Domain:  twenty-seventeen-child
 */
 
-html {
-	font-family: serif;
-	line-height: 1.15;
-	-ms-text-size-adjust: 100%;
-	-webkit-text-size-adjust: 100%;
-}
-
-.site-title {
-    font-size: 4.75rem;
-    line-height: 1.25;
-    font-family: "Trebuchet MS", Helvetica, sans-serif;
-    letter-spacing: -1px;
-}
-
-.navigation-top {
-	background-color: white;
-}
-
-.menu-item {
-	font-family: Arial Narrow, sans-serif;
-    letter-spacing: 3px;
-    font-size: 16px;
-}
-
-.entry-title {
-	font-family: "Trebuchet MS", Helvetica, sans-serif;
-}
-
-.entry-date {
-	color: #00b5e2;
-}
-
 .site-content {
-	background-color: white;
-	font-family: "Georgia";
-	font-size: 14px;
+	background-color: yellow;
 } 	
 
+body, button, input, select, textarea {
+    color: #333;
+    font-family: Adobe Caslon;
+    font-size: 15px;
+    font-size: 0.9375rem;
+    font-weight: 400;
+    line-height: 1.66;
 
-.site-footer {
-	background-color: #bbbcbc;
-}
-
-.widget-area {
-	padding-top: 0px;
-	padding-bottom: 0px;
-}
