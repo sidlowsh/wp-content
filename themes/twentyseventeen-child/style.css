@@ -12,6 +12,8 @@
  Text Domain:  twenty-seventeen-child
 */
 
+
+
 .entry-date {
 	color: #00b5e2;
 }
@@ -42,6 +44,13 @@
   height: auto;
   width: 50%;
   float: center;
+  opacity: 0.5;
+  filter: alpha(opacity=50);
+}
+
+.single-featured-image-header img:hover {
+  opacity: 1.0;
+  filter: alpha(opacity=100); /* For IE8 and earlier */
 }
 
 .site-content {
