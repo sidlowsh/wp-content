@@ -50,34 +50,7 @@ function ev_create_post_type() {
  * @since Reading List 0.1
  */
 
-/* Hook in to the init action and call rl_create_event_taxonomies when it fires. */
-add_action( 'init', 'ev_create_event_taxonomies', 0 );
 
-function ev_create_event_taxonomies() {
-	// Add new taxonomy, keep it non-hierarchical (like tags)
-	$labels = array(
-		'name' 							=> __( 'Keywords', 'readinglist' ),
-		'singular_name' 				=> __( 'Keyword', 'readinglist' ),
-		'search_items' 					=> __( 'Search Keywords', 'readinglist' ),
-		'all_items' 					=> __( 'All Keywords', 'readinglist' ),
-		'edit_item' 					=> __( 'Edit Keyword', 'readinglist' ), 
-		'update_item' 					=> __( 'Update Keyword', 'readinglist' ),
-		'add_new_item' 					=> __( 'Add New Keyword', 'readinglist' ),
-		'new_item_name' 				=> __( 'New Keyword', 'readinglist' ),
-		'separate_items_with_commas' 	=> __( 'Separate keywords with commas', 'readinglist' ),
-		'choose_from_most_used' 		=> __( 'Choose from the most used keywords', 'readinglist' ),
-		'menu_name' 					=> __( 'Keywords', 'readinglist' ),
-	); 	
-		
-	register_taxonomy( 'keywords', array( 'rl_event' ), array(
-		'hierarchical' 		=> false,
-		'labels' 			=> $labels,
-		'show_ui' 			=> true,
-		'show_admin_column' => true,
-		'query_var' 		=> true,
-		'rewrite' 			=> array( 'slug' => 'keywords' ),
-	));
-}
 
 /**
  * Add custom meta box for tracking the page numbers of the book.
@@ -106,8 +79,8 @@ function ev_post_meta_boxes_setup() {
 function ev_add_post_meta_boxes() {
 
 	add_meta_box(
-		'ev-date',								// Unique ID
-		esc_html__( 'Date', 'example' ),		// Title
+		'ev-meta-box',								// Unique ID
+		esc_html__( 'Event Details', 'example' ),		// Title
 		'ev_date_meta_box',					// Callback function
 		'rl_event',								// Add metabox to our custom post type
 		'side',									// Context
@@ -121,7 +94,11 @@ function ev_date_meta_box( $object, $box ) { ?>
 	<?php wp_nonce_field( basename( __FILE__ ), 'ev_date_nonce' ); ?>
 
 	<p class="howto"><label for="ev-date"><?php _e( "Add the date of the event.", 'example' ); ?></label></p>
-	<p><input class="widefat" type="text" name="ev-date" id="ev-date" value="<?php echo esc_attr( get_post_meta( $object->ID, 'ev_date', true ) ); ?>" size="30" /></p>
+	<p><input class="widefat" type="text" name="ev-date" id="ev-date" type="date" value="<?php echo esc_attr( get_post_meta( $object->ID, 'ev_date', true ) ); ?>" size="30" /></p>
+	<p class="howto"><label for="ev-location"><?php _e( "Add the location of the event.", 'example' ); ?></label></p>
+	<p><input class="widefat" type="text" name="ev-date" id="ev-date" type="date" value="<?php echo esc_attr( get_post_meta( $object->ID, 'ev_location', true ) ); ?>" size="30" /></p>
+	<p class="howto"><label for="ev-link"><?php _e( "Add the RSVP link.", 'example' ); ?></label></p>
+	<p><input class="widefat" type="text" name="ev-date" id="ev-date" type="date" value="<?php echo esc_attr( get_post_meta( $object->ID, 'ev_link', true ) ); ?>" size="30" /></p>
 <?php }
 
 /* Save the meta box's data. */
