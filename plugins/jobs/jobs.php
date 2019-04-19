@@ -22,15 +22,15 @@ add_action( 'init', 'create_post_type' );
 
 function create_post_type() {
 	$labels = array(
-		'name' 							=> __( 'Job', 'readinglist' ),
-		'singular_name' 				=> __( 'Job', 'readinglist' ),
-		'search_items'					=> __( 'Search Jobs', 'readinglist' ),
-		'all_items'						=> __( 'All Jobs', 'readinglist' ),
-		'edit_item'						=> __( 'Edit Job', 'readinglist' ),
-		'update_item' 					=> __( 'Update Job', 'readinglist' ),
-		'add_new_item' 					=> __( 'Add New Job', 'readinglist' ),
-		'new_item_name' 				=> __( 'New Job', 'readinglist' ),
-		'menu_name' 					=> __( 'Jobs', 'readinglist' ),
+		'name' 							=> __( 'Job', 'jobboard' ),
+		'singular_name' 				=> __( 'Job', 'jobboard' ),
+		'search_items'					=> __( 'Search Jobs', 'jobboard' ),
+		'all_items'						=> __( 'All Jobs', 'jobboard' ),
+		'edit_item'						=> __( 'Edit Job', 'jobboard' ),
+		'update_item' 					=> __( 'Update Job', 'jobboard' ),
+		'add_new_item' 					=> __( 'Add New Job', 'jobboard' ),
+		'new_item_name' 				=> __( 'New Job', 'jobboard' ),
+		'menu_name' 					=> __( 'Jobs', 'jobboard' ),
 	);
 	
 	$args = array (
@@ -44,40 +44,6 @@ function create_post_type() {
 	register_post_type( 'rl_book', $args );
 }
 
-/**
- * Create our custom taxonomies. One hierarchical one for skills and a flat one for employers.
- *
- * @since Reading List 0.1
- */
-
-/* Hook in to the init action and call rl_create_book_taxonomies when it fires. */
-add_action( 'init', 'rl_create_job_taxonomies', 0 );
-
-function rl_create_job_taxonomies() {
-	// Add new taxonomy, keep it non-hierarchical (like tags)
-	$labels = array(
-		'name' 							=> __( 'Skills', 'readinglist' ),
-		'singular_name' 				=> __( 'Skill', 'readinglist' ),
-		'search_items' 					=> __( 'Search skills', 'readinglist' ),
-		'all_items' 					=> __( 'All skills', 'readinglist' ),
-		'edit_item' 					=> __( 'Edit skills', 'readinglist' ), 
-		'update_item' 					=> __( 'Update skills', 'readinglist' ),
-		'add_new_item' 					=> __( 'Add New skill', 'readinglist' ),
-		'new_item_name' 				=> __( 'New skill', 'readinglist' ),
-		'separate_items_with_commas' 	=> __( 'Separate skills with commas', 'readinglist' ),
-		'choose_from_most_used' 		=> __( 'Choose from the most used skills', 'readinglist' ),
-		'menu_name' 					=> __( 'Skills', 'readinglist' ),
-	); 	
-		
-	register_taxonomy( 'book-author', array( 'rl_book' ), array(
-		'hierarchical' 		=> false,
-		'labels' 			=> $labels,
-		'show_ui' 			=> true,
-		'show_admin_column' => true,
-		'query_var' 		=> true,
-		'rewrite' 			=> array( 'slug' => 'employer' ),
-	));
-}
 
 /**
  * Add custom meta box for tracking the job's employer.
@@ -106,8 +72,8 @@ function rl_post_meta_boxes_setup() {
 function rl_add_post_meta_boxes() {
 
 	add_meta_box(
-		'rl-employer',								// Unique ID
-		esc_html__( 'Employer', 'example' ),		// Title
+		'rl-job-info',								// Unique ID
+		esc_html__( 'Job Information', 'example' ),		// Title
 		'rl_employer_meta_box',					// Callback function
 		'rl_book',								// Add metabox to our custom post type
 		'side',									// Context
@@ -122,6 +88,7 @@ function rl_employer_meta_box( $object, $box ) { ?>
 
 	<p class="howto"><label for="rl-employer"><?php _e( "Add the employer here.", 'example' ); ?></label></p>
 	<p><input class="widefat" type="text" name="rl-employer" id="rl-employer" value="<?php echo esc_attr( get_post_meta( $object->ID, 'rl_employer', true ) ); ?>" size="30" /></p>
+
 <?php }
 
 /* Save the meta box's data. */
@@ -159,5 +126,7 @@ function rl_employer_save_meta( $post_id, $post ) {
 	elseif ( '' == $new_meta_value && $meta_value )
 		delete_post_meta( $post_id, $meta_key, $meta_value );
 } 
+
+
 
 ?>

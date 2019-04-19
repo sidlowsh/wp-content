@@ -72,7 +72,7 @@ function ev_post_meta_boxes_setup() {
 	add_action( 'add_meta_boxes', 'ev_add_post_meta_boxes' );
 	
 	/* Save post meta on the 'save_post' hook. */
-	add_action( 'save_post', 'ev_date_save_meta', 10, 2 );
+	add_action( 'save_post', 'ev_event_save_meta', 10, 2 );
 }
 
 /* Create one or more meta boxes to be displayed on the post editor screen. */
@@ -91,50 +91,44 @@ function ev_add_post_meta_boxes() {
 /* Display the post meta box. */
 function ev_date_meta_box( $object, $box ) { ?>
 
-	<?php wp_nonce_field( basename( __FILE__ ), 'ev_date_nonce' ); ?>
+	<?php wp_nonce_field( basename( __FILE__ ), 'ev_event_nonce' ); ?>
 
 	<p class="howto"><label for="ev-date"><?php _e( "Add the date of the event.", 'example' ); ?></label></p>
-	<p><input class="widefat" type="text" name="ev-date" id="ev-date" type="date" value="<?php echo esc_attr( get_post_meta( $object->ID, 'ev_date', true ) ); ?>" size="30" /></p>
+	<p><input class="widefat" type="text" name="ev-date" id="ev-date" value="<?php echo esc_attr( get_post_meta( $object->ID, 'ev_date', true ) ); ?>" size="30" /></p>
 	<p class="howto"><label for="ev-location"><?php _e( "Add the location of the event.", 'example' ); ?></label></p>
-	<p><input class="widefat" type="text" name="ev-date" id="ev-date" type="date" value="<?php echo esc_attr( get_post_meta( $object->ID, 'ev_location', true ) ); ?>" size="30" /></p>
+	<p><input class="widefat" type="text" name="ev-location" id="ev-location" value="<?php echo esc_attr( get_post_meta( $object->ID, 'ev_location', true ) ); ?>" size="30" /></p>
 	<p class="howto"><label for="ev-link"><?php _e( "Add the RSVP link.", 'example' ); ?></label></p>
-	<p><input class="widefat" type="text" name="ev-date" id="ev-date" type="date" value="<?php echo esc_attr( get_post_meta( $object->ID, 'ev_link', true ) ); ?>" size="30" /></p>
+	<p><input class="widefat" type="link" name="ev-link" id="ev-link" value="<?php echo esc_attr( get_post_meta( $object->ID, 'ev_link', true ) ); ?>" size="30" /></p>
 <?php }
 
-/* Save the meta box's data. */
-function ev_date_save_meta( $post_id, $post ) {
 
+/* Save the meta box's DATE data. */
+function ev_event_save_meta( $post_id, $post ) {
 	/* Verify the nonce before proceeding. */
 	if ( !isset( $_POST['ev_date_nonce'] ) || !wp_verify_nonce( $_POST['ev_date_nonce'], basename( __FILE__ ) ) )
 		return $post_id;
-
 	/* Get the post type object. */
 	$post_type = get_post_type_object( $post->post_type );
-
 	/* Check if the current user has permission to edit the post. */
 	if ( !current_user_can( $post_type->cap->edit_post, $post_id ) )
 		return $post_id;
-
 	/* Get the posted data and sanitize it for use as an HTML class. */
 	$new_meta_value = ( isset( $_POST['ev-date'] ) ? sanitize_html_class( $_POST['ev-date'] ) : '' );
 
+	
 	/* Get the meta key. */
 	$meta_key = 'ev_date';
-
+	
 	/* Get the meta value of the custom field key. */
 	$meta_value = get_post_meta( $post_id, $meta_key, true );
-
 	/* If a new meta value was added and there was no previous value, add it. */
 	if ( $new_meta_value && '' == $meta_value )
 		add_post_meta( $post_id, $meta_key, $new_meta_value, true );
-
 	/* If the new meta value does not match the old value, update it. */
 	elseif ( $new_meta_value && $new_meta_value != $meta_value )
 		update_post_meta( $post_id, $meta_key, $new_meta_value );
-
 	/* If there is no new meta value but an old value exists, delete it. */
 	elseif ( '' == $new_meta_value && $meta_value )
 		delete_post_meta( $post_id, $meta_key, $meta_value );
 } 
-
 ?>
