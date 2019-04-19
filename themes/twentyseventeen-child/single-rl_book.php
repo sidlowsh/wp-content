@@ -10,7 +10,7 @@
 		<main id="main" class="site-main" role="main">
 			
 			
-			<span class="meta">"Employer: "<?php echo get_post_meta( $post->ID , 'rl_employer', true ); ; ?></span>
+			<span class="meta">Employer: <?php echo get_post_meta( $post->ID , 'rl_employer', true ); ; ?></span>
 
 			<?php
 
