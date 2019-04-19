@@ -13,6 +13,15 @@
 */
 
 
+.header-image-wrap {
+    width: 500px;
+    margin: 0 auto;
+}
+
+.header-image {
+    border-bottom: none;
+}
+
 
 .entry-date {
 	color: #00b5e2;
@@ -26,6 +35,12 @@
 	font-family: Arial Narrow, sans-serif;
     letter-spacing: 3px;
     font-size: 16px;
+}
+
+.meta {
+	font-size: 17px;
+	font-weight: bold;
+	color: #041e42;
 }
 
 .navigation-top {
