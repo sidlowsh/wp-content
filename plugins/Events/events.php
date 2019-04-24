@@ -44,12 +44,6 @@ function ev_create_post_type() {
 	register_post_type( 'rl_event', $args );
 }
 
-/**
- * Create our custom taxonomies. One hierarchical one for genres and a flat one for authors.
- *
- * @since Reading List 0.1
- */
-
 
 
 /**

@@ -22,7 +22,7 @@ add_action( 'init', 'create_post_type' );
 
 function create_post_type() {
 	$labels = array(
-		'name' 							=> __( 'Job', 'jobboard' ),
+		'name' 							=> __( 'Jobs', 'jobboard' ),
 		'singular_name' 				=> __( 'Job', 'jobboard' ),
 		'search_items'					=> __( 'Search Jobs', 'jobboard' ),
 		'all_items'						=> __( 'All Jobs', 'jobboard' ),
@@ -36,12 +36,13 @@ function create_post_type() {
 	$args = array (
 		'labels' 		=> $labels,
 		'public' 		=> true,
+		'publicly_queryable' => true,
 		'menu_position' => 20,
 		'has_archive' 	=> true,
 		'rewrite'		=> array( 'slug' => 'jobs' ),
 		'supports' 		=> array( 'title', 'thumbnail', 'editor' )
 	);
-	register_post_type( 'rl_book', $args );
+	register_post_type( 'jobs', $args );
 }
 
 
@@ -75,7 +76,7 @@ function rl_add_post_meta_boxes() {
 		'rl-job-info',								// Unique ID
 		esc_html__( 'Job Information', 'example' ),		// Title
 		'rl_employer_meta_box',					// Callback function
-		'rl_book',								// Add metabox to our custom post type
+		'jobs',								// Add metabox to our custom post type
 		'side',									// Context
 		'default'								// Priority
 	);
