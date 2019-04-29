@@ -13,22 +13,21 @@
 */
 
 
-.header-image-wrap {
-    width: 500px;
-    margin: 0 auto;
-}
-
-.header-image {
-    border-bottom: none;
-}
-
-
 .entry-date {
 	color: #00b5e2;
 }
 
 .entry-title {
 	font-family: "Trebuchet MS", Helvetica, sans-serif;
+}
+
+.header-image {
+	border-bottom: none;
+}
+
+.header-image-wrap {
+    width: 500px;
+    margin: 0 auto;
 }
 
 .menu-item {
@@ -56,16 +55,16 @@
 }
 
 .single-featured-image-header img {
-  height: auto;
-  width: 50%;
-  float: center;
-  opacity: 0.5;
-  filter: alpha(opacity=50);
+	height: auto;
+	width: 50%;
+	float: center;
+	opacity: 0.5;
+	filter: alpha(opacity=50);
 }
 
 .single-featured-image-header img:hover {
-  opacity: 1.0;
-  filter: alpha(opacity=100); /* For IE8 and earlier */
+	opacity: 1.0;
+	filter: alpha(opacity=100); /* For IE8 and earlier */
 }
 
 .site-content {
